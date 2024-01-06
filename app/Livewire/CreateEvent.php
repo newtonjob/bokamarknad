@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Event;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 class CreateEvent extends Component
@@ -21,6 +22,8 @@ class CreateEvent extends Component
 
     public function store()
     {
+        Gate::authorize('admin');
+
         Event::create($this->validate([
             'name'                => 'required',
             'start_date'          => 'required|date',
