@@ -30,7 +30,14 @@
                     <td>{{ $booking->event->start_date->toFormattedDayDateString() }}</td>
                     <td>{{ $booking->event->end_date->toFormattedDayDateString() }}</td>
                     <td>{{ $booking->price }}</td>
-                    <td></td>
+                    <td>
+                        <a
+                            class="text-indigo-600 text-sm"
+                            href="#"
+                        >
+                            Contact {{ auth()->user()->admin ? 'customer' : 'organizer' }}
+                        </a>
+                    </td>
                 </tr>
             @empty
                 <tr>

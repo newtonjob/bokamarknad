@@ -15,12 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
 
-         User::factory()->admin()->create([
+         User::factory()->admin()->withPersonalTeam()->create([
              'name'  => 'Admin User',
              'email' => 'admin@example.com',
          ]);
 
-         User::factory()->create([
+         User::factory()->withPersonalTeam()->create([
              'name'  => 'Customer User',
              'email' => 'customer@example.com',
          ]);

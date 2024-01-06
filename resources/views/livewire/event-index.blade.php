@@ -1,9 +1,11 @@
 <div>
-    <div class="flex mb-10 justify-end">
-        <x-button-link :href="route('events.create')">
-            + New Event
-        </x-button-link>
-    </div>
+    @admin
+        <div class="flex mb-10 justify-end">
+            <x-button-link :href="route('events.create')">
+                + New Event
+            </x-button-link>
+        </div>
+    @endadmin
 
     <div class="relative overflow-x-auto">
         <table>
@@ -22,19 +24,24 @@
             @forelse ($events as $event)
                 <tr>
                     <td>{{ $event->name }}</td>
-                    <td>{{ $event->price }}</td>
+                    <td>{{ $event->current_price }}</td>
                     <td>{{ $event->start_date->toFormattedDayDateString() }}</td>
                     <td>{{ $event->end_date->toFormattedDayDateString() }}</td>
-                    <td>{{ $event->price }}</td>
+                    <td>{{ $event->early_bird_price }}</td>
                     <td>{{ $event->early_bird_ended_at->toFormattedDayDateString() }}</td>
                     <td>
-                        <a
-                            class="text-indigo-600 text-sm"
-                            href="{{ route('bookings.index', ['event_id' => $event->id]) }}"
-                            wire:navigate
-                        >
-                            View bookings
-                        </a>
+                        @admin
+                            <x-button-link
+                                href="{{ route('bookings.index', ['event_id' => $event->id]) }}"
+                                wire:navigate
+                            >
+                                View bookings
+                            </x-button-link>
+                        @else
+                            <x-button wire:click="book('{{ $event->id }}')">
+                                Book
+                            </x-button>
+                        @endadmin
                     </td>
                 </tr>
             @empty
