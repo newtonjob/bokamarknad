@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,6 @@ Route::view('/', 'welcome');
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
-    Route::resource('events', EventController::class)->only('index', 'create');
+    Route::resource('events',   EventController::class)->only('index', 'create');
+    Route::resource('bookings', BookingController::class)->only('index');
 });

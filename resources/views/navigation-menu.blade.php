@@ -19,6 +19,10 @@
                     <x-nav-link href="{{ route('events.index') }}" :active="request()->routeIs('events.index')">
                         Events
                     </x-nav-link>
+
+                    <x-nav-link href="{{ route('bookings.index') }}" :active="request()->routeIs('bookings.index')">
+                        Bookings
+                    </x-nav-link>
                 </div>
             </div>
 

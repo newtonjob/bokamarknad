@@ -15,6 +15,7 @@
                 <th>End Date</th>
                 <th>Early Bird Price</th>
                 <th>Early Bird Ends</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -26,10 +27,19 @@
                     <td>{{ $event->end_date->toFormattedDayDateString() }}</td>
                     <td>{{ $event->price }}</td>
                     <td>{{ $event->early_bird_ended_at->toFormattedDayDateString() }}</td>
+                    <td>
+                        <a
+                            class="text-indigo-600 text-sm"
+                            href="{{ route('bookings.index', ['event_id' => $event->id]) }}"
+                            wire:navigate
+                        >
+                            View bookings
+                        </a>
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6">No events created.</td>
+                    <td colspan="7">No events created.</td>
                 </tr>
             @endforelse
             </tbody>
