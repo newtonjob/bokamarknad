@@ -15,8 +15,12 @@
                 <th>Price</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th>Early Bird Price</th>
-                <th>Early Bird Ends</th>
+
+                @admin
+                    <th>Early Bird Price</th>
+                    <th>Early Bird Ends</th>
+                @endadmin
+
                 <th></th>
             </tr>
             </thead>
@@ -24,11 +28,14 @@
             @forelse ($events as $event)
                 <tr>
                     <td>{{ $event->name }}</td>
-                    <td>{{ $event->current_price }}</td>
+                    <td>{{ auth()->user()->admin ? $event->price : $event->current_price }}</td>
                     <td>{{ $event->start_date->toFormattedDayDateString() }}</td>
                     <td>{{ $event->end_date->toFormattedDayDateString() }}</td>
-                    <td>{{ $event->early_bird_price }}</td>
-                    <td>{{ $event->early_bird_ended_at->toFormattedDayDateString() }}</td>
+
+                    @admin
+                        <td>{{ $event->early_bird_price }}</td>
+                        <td>{{ $event->early_bird_ended_at->toFormattedDayDateString() }}</td>
+                    @endadmin
                     <td>
                         @admin
                             <x-button-link
@@ -46,7 +53,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="7">No events created.</td>
+                    <td colspan="7">No events at the moment.</td>
                 </tr>
             @endforelse
             </tbody>
