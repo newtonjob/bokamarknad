@@ -19,5 +19,5 @@ Route::view('/', 'welcome');
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
-    Route::resource('events', EventController::class)->only('index');
+    Route::resource('events', EventController::class)->only('index', 'create');
 });
